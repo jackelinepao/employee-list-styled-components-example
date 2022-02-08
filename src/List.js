@@ -1,5 +1,5 @@
 import React from "react";
-import { useEmployeeContext } from "./employeeContext";
+import { useEmployeeContext } from "./EmployeeContext";
 import styled from "styled-components";
 
 const Wrapper = styled.div``;

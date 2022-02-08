@@ -1,4 +1,4 @@
-import ContextProvider from "./EmployeeManagementContext";
+import ContextProvider from "./EmployeeContext";
 import { Form } from "./Form";
 import { List } from "./List";
 import "./App.css";
