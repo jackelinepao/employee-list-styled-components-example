@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import ContextProvider from "./employeeContext";
+import { Form } from "./Form";
+import { List } from "./List";
+import "./App.css";
+import "antd/dist/antd.css";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ContextProvider>
+        <Router>
+          <nav>
+            <Link to="/add-employee">Add Employee</Link> |{" "}
+            <Link to="/employee-list">Employee List</Link>
+          </nav>
+          <Routes>
+            <Route path="/add-employee" element={<Form />} />
+            <Route path="/employee-list" element={<List />} />
+          </Routes>
+        </Router>
+      </ContextProvider>
     </div>
   );
 }
