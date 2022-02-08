@@ -15,17 +15,19 @@ const countries = ["US", "Canada"];
 function Form() {
   const [country, setCountry] = useState();
   const { createEmmployee } = useEmployeeContext();
+  const [form] = AntDForm.useForm();
   const onClick = (value) => {
     setCountry(value);
   };
   const onFormSubmit = (formValues) => {
     createEmmployee(formValues);
+    form.resetFields();
   };
   return (
     <Wrapper>
       <h1>Add an employee</h1>
       <h6>First name</h6>
-      <AntDForm onFinish={onFormSubmit}>
+      <AntDForm form={form} onFinish={onFormSubmit}>
         <AntDForm.Item
           name="firstName"
           rules={[{ required: true, message: "Please input this value" }]}
