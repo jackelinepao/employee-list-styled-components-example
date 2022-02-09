@@ -1,8 +1,8 @@
-import { Form } from "./Form";
-import { List } from "./List";
+import { Form } from "../Form";
+import { List } from "../List";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
-function MainNavigator() {
+function RootRoutes() {
   return (
     <Router>
       <nav>
@@ -17,4 +17,4 @@ function MainNavigator() {
   );
 }
 
-export { MainNavigator };
+export { RootRoutes };
