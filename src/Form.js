@@ -1,9 +1,21 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Input, Select, Form as AntDForm, Button } from "antd";
+import React, { useState, useEffect } from "react";
+import { Input, Select, Form as AntDForm } from "antd";
+import { Button } from "./ui/Button";
 import { useEmployeeContext } from "./EmployeeContext";
+import styled from "./ui/styledComponents/styled-components";
+import { Card } from "./ui/Card";
+import { useChangeDocTitle } from "./hook/useChangeDocTitle";
 
-const Wrapper = styled.div``;
+// const StyledInput = styled(Input).attrs({ type: "password" })``;
+const StyledInput = styled(Input)`
+  &:hover {
+    border: solid 1px red;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  background-color: red;
+`;
 
 const countriesObj = {
   US: ["AZ", "NY", "Los Angeles"],
@@ -16,6 +28,13 @@ function Form() {
   const [country, setCountry] = useState();
   const { createEmmployee } = useEmployeeContext();
   const [form] = AntDForm.useForm();
+
+  const { setdocumentTitle } = useChangeDocTitle();
+
+  useEffect(() => {
+    setdocumentTitle("Add new Employee");
+  }, [setdocumentTitle]);
+
   const onClick = (value) => {
     setCountry(value);
   };
@@ -24,7 +43,7 @@ function Form() {
     form.resetFields();
   };
   return (
-    <Wrapper>
+    <Card>
       <h1>Add an employee</h1>
       <h6>First name</h6>
       <AntDForm form={form} onFinish={onFormSubmit}>
@@ -32,7 +51,8 @@ function Form() {
           name="firstName"
           rules={[{ required: true, message: "Please input this value" }]}
         >
-          <Input />
+          {/* <Input /> */}
+          <StyledInput />
         </AntDForm.Item>
         <h6>Last name</h6>
         <AntDForm.Item
@@ -66,7 +86,6 @@ function Form() {
         >
           <Select>
             {Object.entries(countriesObj).map(([key, value]) => {
-              console.log({ key, country });
               if (key === country) {
                 return value.map((region) => (
                   <Select.Option key={region}>{region}</Select.Option>
@@ -77,10 +96,10 @@ function Form() {
           </Select>
         </AntDForm.Item>
         <AntDForm.Item>
-          <Button htmlType="submit">Submit</Button>
+          <StyledButton htmlType="submit">Submit</StyledButton>
         </AntDForm.Item>
       </AntDForm>
-    </Wrapper>
+    </Card>
   );
 }
 
